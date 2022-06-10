@@ -1,0 +1,38 @@
+{% block body %}
+<div class="container" py-40 mb-30>
+  <form method="post" action=" ">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input
+        type="text"
+        class="form-control"
+        name="name"
+        id="name"
+        placeholder="Enter your title"
+      />
+    </div>
+    <div class="form-group">
+      <label for="subtitle">Caption</label>
+      <input
+        type="text"
+        class="form-control"
+        name="caption"
+        id="caption"
+        placeholder="subtitle"
+      />
+    </div>
+    <div class="form-group">
+      <label for="floatingTextarea">Create Post</label>
+      <textarea
+        class="form-control"
+        placeholder="Enter post here"
+        name="quotes"
+        id="floatingTextarea"
+        style="height: 100px"
+      ></textarea>
+    </div>
+    <button class="btn btn-primary" type="submit">Submit</button>
+  </form>
+</div>
+{% endblock body %}

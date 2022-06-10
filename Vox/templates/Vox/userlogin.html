@@ -1,0 +1,23 @@
+<div class="userlogin">
+  <form id="userlogin" method="POST" ,action="/userlogin/">
+    <b>Login</b>
+    <br />
+    <br />
+    {% csrf_token %}
+    <span class="logintext">USERNAME </span>
+    <input name="username" type="text" placeholder="username" class="input" />
+    <br />
+    <span class="logintext">PASSWORD </span>
+    <input
+      type="password"
+      placeholder="password"
+      name="password"
+      class="input"
+    />
+    <br />
+    <br />
+    <button type="submit" class="btn btn-dark">Login</button>
+    <br />
+    <br />
+  </form>
+</div>
