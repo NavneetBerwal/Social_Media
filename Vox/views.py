@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from Vox.models import Post
 from datetime import datetime
 from django.contrib.auth.forms import UserCreationForm
-from .forms import CreateUserForm
+from .forms import CreateUserForm, postForm
 from django.contrib.auth import authenticate, login, logout
 
 
@@ -11,15 +11,21 @@ def home(request):
 
 
 def post(request):
+    posts = postForm()
     if request.method == "POST":
-        name = request.POST.get('name')
-        quotes = request.POST.get('quotes')
-        caption = request.POST.get('caption')
-        post = Post(name=name, quotes=quotes,
-                    caption=caption, date=datetime.today())
-        post.save()
+        posts = postForm(request.POST)
+        if posts.is_valid():
+            posts.save()
+            return redirect('home')
+        # name = request.POST.get('name')
+        # quotes = request.POST.get('quotes')
+        # caption = request.POST.get('caption')
+        # postimg = request.POST.get('post_img')
+        # post = Post(name=name, quotes=quotes,
+        #             caption=caption, postimg=postimg, date=datetime.today())
+        # post.save()
 
-    return render(request, 'Vox/Post.html')
+    return render(request, 'Vox/Post.html', {'posts': posts})
 
 
 def registration(request):
