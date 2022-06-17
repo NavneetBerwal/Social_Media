@@ -1,0 +1,17 @@
+{% comment %} {% extends 'accounts/layouts/maintemp.html' %} {% endcomment %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Posts </h1>
+            {% for data in form %}
+                {{data.name}}
+                {{data.quotes}}
+                {{data.postimg}}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

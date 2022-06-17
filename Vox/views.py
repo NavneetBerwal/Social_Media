@@ -11,7 +11,18 @@ def home(request):
 
 
 def post(request):
+
     posts = postForm()
+
+    if request.method == 'POST':
+        print(request)
+        posts = postForm(request.POST, request.FILES)
+        if posts.is_valid():
+            posts.save()
+
+    context = {'posts':posts}
+
+    """
     if request.method == "POST":
         posts = postForm(request.POST)
         if posts.is_valid():
@@ -24,6 +35,7 @@ def post(request):
         # post = Post(name=name, quotes=quotes,
         #             caption=caption, postimg=postimg, date=datetime.today())
         # post.save()
+    """
 
     return render(request, 'Vox/Post.html', {'posts': posts})
 
@@ -65,3 +77,8 @@ def userlogout(request):
     logout(request)
     messages.info(request, "Successfully logged out")
     return redirect('home.html')
+
+def feed(request):
+    form = Post.objects.all()
+    context = {'form':form}
+    return render (request, 'Vox/feed.html', context)
