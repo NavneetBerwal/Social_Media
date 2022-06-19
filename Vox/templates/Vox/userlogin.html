@@ -1,7 +1,15 @@
+
+<title>Login</title>
+
+<body>
+  {% include 'Vox/navbar.html' %}
+</body>
+
 <div class="userlogin">
   <form id="userlogin" method="POST" ,action="/userlogin/">
     {% csrf_token %}
-    <b>Login</b>
+    <container>
+    <h1>Login</h1>
     <br />
     <br />
     <span class="logintext">USERNAME </span>
@@ -19,5 +27,6 @@
     <button type="submit" class="btn btn-dark">Login</button>
     <br />
     <br />
+    </container>
   </form>
 </div>

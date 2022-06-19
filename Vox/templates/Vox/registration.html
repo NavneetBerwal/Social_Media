@@ -1,5 +1,11 @@
-<b>Register</b>
 
+<title>Register</title>
+
+<body>
+  {% include 'Vox/navbar.html' %}
+</body>
+<h1>Register</h1>
+<br>
 <form action="" method="POST">
   {% csrf_token %} {{form}}
   <input type="submit" name="Create User" id="" />
