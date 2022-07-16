@@ -24,10 +24,11 @@
     crossorigin="anonymous"
   ></script>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-black bg-none">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand" href="{% url 'feed' %}">Vox</a>
     <button
+      color = "navy blue"
       class="navbar-toggler"
       type="button"
       data-bs-toggle="collapse"
@@ -40,9 +41,9 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
+        {% comment %} <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="{% url 'feed' %}">Home</a>
-        </li>
+        </li> {% endcomment %}
         <li class="nav-item">
           <a class="nav-link" href="{% url 'registration' %}">Register</a>
         </li>
@@ -52,9 +53,9 @@
         {% comment %} <li class="nav-item">
           <a class="nav-link" href="{% url 'admin' %}">Admin</a>
         </li> {% endcomment %}
-        <li class="nav-item">
+        {% comment %} <li class="nav-item">
           <a class="nav-link disabled">Disabled</a>
-        </li>
+        </li> {% endcomment %}
       </ul>
       <form class="d-flex">
         <input

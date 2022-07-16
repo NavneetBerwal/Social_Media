@@ -6,9 +6,6 @@
 </body>
 <h3>Create New Post</h3>
 <br />
-<body>
-  {% include 'Vox/navbar.html' %}
-</body>
 <form action="{{ action_url}}" method="POST" enctype="multipart/form-data">
   {% csrf_token %}{{posts}}
   <input type="submit" />

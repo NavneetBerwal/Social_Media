@@ -4,12 +4,14 @@ from datetime import datetime
 from django.contrib.auth.forms import UserCreationForm
 from .forms import CreateUserForm, postForm
 from django.contrib.auth import authenticate, login, logout
+#from django.contrib.auth.decorators import login_required
 
 
 def home(request):
     return render(request, 'Vox/home.html')
 
 
+#@login_required(login_url='userlogin')
 def post(request):
 
     posts = postForm()
@@ -20,24 +22,9 @@ def post(request):
         if posts.is_valid():
             posts.save()
 
-    context = {'posts':posts}
+    context = {'posts': posts}
 
-    """
-    if request.method == "POST":
-        posts = postForm(request.POST)
-        if posts.is_valid():
-            posts.save()
-            return redirect('home')
-        # name = request.POST.get('name')
-        # quotes = request.POST.get('quotes')
-        # caption = request.POST.get('caption')
-        # postimg = request.POST.get('post_img')
-        # post = Post(name=name, quotes=quotes,
-        #             caption=caption, postimg=postimg, date=datetime.today())
-        # post.save()
-    """
-
-    return render(request, 'Vox/Post.html', {'posts': posts})
+    return render(request, 'Vox/Post.html', context)
 
 
 def registration(request):
@@ -65,7 +52,8 @@ def userlogin(request):
 
         if user is not None:
             login(request, user)
-            return redirect('home')
+            messages.info(request, f"You are now logged in as {username}")
+            return redirect('feed')
         else:
             messages.info(request, "Username OR Password is incorrect")
 
@@ -78,7 +66,9 @@ def userlogout(request):
     messages.info(request, "Successfully logged out")
     return redirect('home.html')
 
+
+#@login_required(login_url='userlogin')
 def feed(request):
     form = Post.objects.all()
-    context = {'form':form}
-    return render (request, 'Vox/feed.html', context)
+    context = {'form': form}
+    return render(request, 'Vox/feed.html', context)
