@@ -24,7 +24,8 @@
     crossorigin="anonymous"
   ></script>
 
-<nav class="navbar navbar-expand-lg navbar-black bg-none">
+<nav class="navbar navbar-expand-lg navbar-black bg-light
+">
   <div class="container-fluid">
     <a class="navbar-brand" href="{% url 'feed' %}">Vox</a>
     <button
@@ -44,12 +45,31 @@
         {% comment %} <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="{% url 'feed' %}">Home</a>
         </li> {% endcomment %}
+
+        {% if user.is_authenticated %}
+        <span class="hello">Hello, {{request.user}}</span>
+        <a class="nav-link hello" href="{% url 'userlogout' %}">Logout</a>
+        <a class="nav-link hello" href="{% url 'post' %}" role="button">new post</a>
+        {% else %}
+        <a class="nav-link hello" href="{% url 'userlogin' %}" role="button">Login</a>
+        <a class="nav-link hello" href="{% url 'registration' %}" role="button">Register</a>
+        {% endif %}
+
+
+        {% comment %} {% if user.is_authenticated %}
+        <span class="hello">Hello, {{request.user}}</span>
+        <a class="nav-link hello" href="{% url 'userlogout' %}">Logout</a>
+        {% else %}
         <li class="nav-item">
           <a class="nav-link" href="{% url 'registration' %}">Register</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{% url 'userlogin' %}">Login</a>
         </li>
+        {% endif %} {% endcomment %}
+        {% comment %} <li class="nav-item">
+          <a class="nav-link" href="{% url 'Post' %}">Creat Post</a>
+        </li> {% endcomment %}
         {% comment %} <li class="nav-item">
           <a class="nav-link" href="{% url 'admin' %}">Admin</a>
         </li> {% endcomment %}
@@ -57,15 +77,6 @@
           <a class="nav-link disabled">Disabled</a>
         </li> {% endcomment %}
       </ul>
-      <form class="d-flex">
-        <input
-          class="form-control me-2"
-          type="search"
-          placeholder="Search"
-          aria-label="Search"
-        />
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
     </div>
   </div>
 </nav>

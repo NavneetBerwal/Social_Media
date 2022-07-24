@@ -3,8 +3,14 @@
 
 
 <div class="login-box">
+  {% if messages %}
+    {% for message in messages %}
+      {{ message }}
+    {% endfor %}
+  {% endif %}
   <h2>Login</h2>
-  <form>
+  <form method = 'POST'>
+    {% csrf_token %}
     <div class="user-box">
       <input type="text" name="username" placeholder="username" class ="input">
       <br>
@@ -14,13 +20,14 @@
       <input type="password" placeholder="password" name="password" class="input">
       <label>Password</label>
     </div>
-    <a href="{% url 'feed' %}">
+    {% comment %} <a href="{% url 'feed' %}">
       <span></span>
       <span></span>
       <span></span>
       <span></span>
       Submit
-    </a>
+    </a> {% endcomment %}
+    <button type="submit" class="btn btn-dark">Login</button>
   </form>
 </div>
 

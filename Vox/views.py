@@ -11,7 +11,7 @@ def home(request):
     return render(request, 'Vox/home.html')
 
 
-#@login_required(login_url='userlogin')
+# @login_required(login_url='userlogin')
 def post(request):
 
     posts = postForm()
@@ -22,10 +22,26 @@ def post(request):
         if posts.is_valid():
             posts.save()
 
-    context = {'posts': posts}
+    context = {
+        # 'qs': qs,
+        # 'user': user,
+        'posts': posts
+    }
 
     return render(request, 'Vox/Post.html', context)
 
+
+def like(request, pk):
+    user = request.user
+    post = Post.objects.get(id=pk)
+    post.like.add(user)
+    return redirect('feed')
+
+def unlike(request, pk):
+    user = request.user
+    post = Post.objects.get(id=pk)
+    post.like.remove(user)
+    return redirect('feed')
 
 def registration(request):
     form = CreateUserForm()
@@ -52,10 +68,11 @@ def userlogin(request):
 
         if user is not None:
             login(request, user)
-            messages.info(request, f"You are now logged in as {username}")
+            #messages.info(request, f"You are now logged in as {username}")
             return redirect('feed')
         else:
-            messages.info(request, "Username OR Password is incorrect")
+            #messages.info(request, "Username OR Password is incorrect")
+            return redirect('userlogin')
 
     context = {}
     return render(request, 'Vox/userlogin.html', context)
@@ -63,12 +80,17 @@ def userlogin(request):
 
 def userlogout(request):
     logout(request)
-    messages.info(request, "Successfully logged out")
-    return redirect('home.html')
+    # messages.info(request, "Successfully logged out")
+    print("logged out")
+    return redirect('home')
 
 
-#@login_required(login_url='userlogin')
+# @login_required(login_url='userlogin')
 def feed(request):
     form = Post.objects.all()
     context = {'form': form}
     return render(request, 'Vox/feed.html', context)
+
+
+def profile(request):
+    form = Post.objects.all()

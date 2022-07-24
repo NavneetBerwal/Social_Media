@@ -13,31 +13,19 @@
       <h1>Posts</h1>
       {% for data in form %}
 
-      <div class="card" style="width: 50%;">
-        <img src="{{ data.postimg.url}}" class="card-img-top" alt="...">
+      <div class="card" style="width: 50%">
+        <img src="{{ data.postimg.url}}" class="card-img-top" alt="..." />
         <div class="card-body">
           <h5 class="card-title">{{data.name}}</h5>
           <p class="card-text">{{data.quotes}}</p>
         </div>
-        {% comment %} <ul class="list-group list-group-flush">
-          <li class="list-group-item">An item</li>
-          <li class="list-group-item">A second item</li>
-          <li class="list-group-item">A third item</li>
-        </ul> {% endcomment %}
         <div class="card-body">
-          <a href="#" class="card-link">Like</a>
+          <a href="{% url 'like' data.id %}" class="card-link">Like</a>
+          <a href="{% url 'unlike' data.id %}" class="card-link">Unlike</a>
           <a href="#" class="card-link">Comment</a>
         </div>
-        
       </div>
-      <br><br>
-
-      {% comment %} <ul>
-      <li><b>Name :</b> {{data.name}}</li>
-      <li><b>Caption : </b>{{data.quotes}}</li>
-      <li>{{data.postimg.url}}</li>
-      <td><img src="/{{BASIC_DIR}}/{{img.img}}" width="120" /></td>
-      </ul> {% endcomment %}
+      <br /><br />
       {% endfor %}
     </div>
   </div>
