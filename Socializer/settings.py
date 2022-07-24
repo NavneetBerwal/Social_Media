@@ -127,8 +127,4 @@ MEDIA_ROOT = Path.joinpath(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 
-# 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
-
-#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
-
-# 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
+# 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

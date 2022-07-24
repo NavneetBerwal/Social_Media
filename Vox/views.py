@@ -51,8 +51,7 @@ def registration(request):
         if form.is_valid():
             user = form.save()
             username = form.cleaned_data.get('username')
-
-            return redirect('home')
+            return redirect('userlogin')
 
     context = {'form': form}
     return render(request, 'Vox/registration.html', context)

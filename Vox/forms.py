@@ -13,4 +13,4 @@ class CreateUserForm(UserCreationForm):
 class postForm(ModelForm):
     class Meta:
         model = Post
-        fields = '__all__'
+        fields = ['name', 'quotes', 'postimg']
