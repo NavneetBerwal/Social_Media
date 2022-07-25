@@ -4,14 +4,14 @@ from datetime import datetime
 from django.contrib.auth.forms import UserCreationForm
 from .forms import CreateUserForm, postForm
 from django.contrib.auth import authenticate, login, logout
-#from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required
 
 
 def home(request):
     return render(request, 'Vox/home.html')
 
 
-# @login_required(login_url='userlogin')
+@login_required(login_url='userlogin')
 def post(request):
 
     posts = postForm()
@@ -23,12 +23,10 @@ def post(request):
             posts.save()
 
     context = {
-        # 'qs': qs,
-        # 'user': user,
         'posts': posts
     }
 
-    return render(request, 'Vox/Post.html', context)
+    return render(request, 'Vox/feed.html', context)
 
 
 def like(request, pk):
@@ -84,12 +82,16 @@ def userlogout(request):
     return redirect('home')
 
 
-# @login_required(login_url='userlogin')
+@login_required(login_url='userlogin')
 def feed(request):
     form = Post.objects.all()
     context = {'form': form}
     return render(request, 'Vox/feed.html', context)
 
 
+@login_required
 def profile(request):
     form = Post.objects.all()
+    context = {'form':form}
+    
+    return render(request, 'Vox/profile.html', context)
