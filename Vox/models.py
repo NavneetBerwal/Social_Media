@@ -5,28 +5,31 @@ from PIL import Image
 
 
 class Post(models.Model):
-    name = models.CharField(max_length=122)
+    name = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name='user')
     quotes = models.CharField(max_length=200)
     date = models.DateTimeField(auto_now_add=True)
-    like = models.ManyToManyField(User, blank = True)
+    like = models.ManyToManyField(User, blank=True)
     postimg = models.ImageField(
         upload_to="static/images", null=True, blank=True)
     
-
-    def __str__(self):
-        return self.name
+    @property
+    def num_likes(self):
+        return self.liked.all().count()
 
     class Meta:
         ordering = ['-date']
 
+
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    Bio = models.TextField()
-    image = models.ImageField(default='default.jpg', upload_to='profile_images')
+    bio = models.TextField()
+    image = models.ImageField(default='default.jpg',
+                              upload_to='profile_images')
 
     def __str__(self):
         return self.user.username
-    
+
 
 def save(self, *args, **kwargs):
     super().save()

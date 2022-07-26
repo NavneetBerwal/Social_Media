@@ -4,47 +4,140 @@
   {% include 'Vox/navbar.html' %}
 </body>
 
-{% comment %} <div class="row my-3 p-3">
-</div> {% endcomment %}
-
-<div class="row my-3 p-3">
-  <h1>This is the profile page for {{user.username}}</h1>
-  <img class="rounded-circle account-img" src="{{ profile.avatar.url }} " style="cursor: pointer;"/>
-</div>
-{% comment %} {% if user_form.errors %}
-  <div class="alert alert-danger alert-dismissible" role="alert">
-      <div id="form_errors">
-          {% for key, value in user_form.errors.items %}
-              <strong>{{ value }}</strong>
-          {% endfor %}
-      </div>
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-      </button>
-  </div>
-{% endif %}
-<div class="form-content">
-  <form method="post" enctype="multipart/form-data">
-      {% csrf_token %}
-      <div class="form-row">
-          <div class="col-md-5">
-              <div class="form-group">
-                  <label class="small mb-1">Username:</label>
-                      {{ user_form.username }}
-                  <label class="small mb-1">Email:</label>
-                      {{ user_form.email }}
-              </div>
-              <div class="form-group">
-                  <a href="#">Change Password</a>
-                  <hr>
-                  <label class="small mb-1">Change Avatar:</label>
-                  {{ profile_form.avatar }}
-              </div>
-              <label class="small mb-1">Bio:</label> {{ profile_form.bio }}
+<div class="row py-5 px-4">
+  <div class="col-xl-4 col-md-6 col-sm-10 mx-auto">
+    <!-- Profile widget -->
+    <div class="bg-white shadow rounded overflow-hidden">
+      <div class="px-4 pt-0 pb-4 bg-dark">
+        <div class="media align-items-end profile-header">
+          <div class="profile mr-3">
+            <img
+              src="{{ form.image.url }}"
+              alt="..."
+              width="130"
+              class="rounded mb-2 img-thumbnail"
+            /><a href="#" class="btn btn-dark btn-sm btn-block"></a>
           </div>
+          <div class="media-body mb-5 text-white">
+            <h2 class="mt-0 mb-0">{{request.user.username}}</h2>
+            <p class="small mb-4">
+              <i class="fa fa-map-marker mr-2"></i>{{ form.bio }}
+            </p>
+            <br />
+          </div>
+        </div>
       </div>
-      <br><br>
-      <button type="submit" class="btn btn-dark btn-lg">Save Changes</button>
-      <button type="reset" class="btn btn-dark btn-lg">Reset</button>
-  </form>
-</div> {% endcomment %}
+
+      <!-- <div class="bg-light p-4 d-flex justify-content-end text-center">
+              <ul class="list-inline mb-0">
+                  <li class="list-inline-item">
+                      <h5 class="font-weight-bold mb-0 d-block">241</h5><small class="text-muted"> <i class="fa fa-picture-o mr-1"></i>Photos</small>
+                  </li>
+                  <li class="list-inline-item">
+                      <h5 class="font-weight-bold mb-0 d-block">84K</h5><small class="text-muted"> <i class="fa fa-user-circle-o mr-1"></i>Followers</small>
+                  </li>
+              </ul>
+          </div> -->
+      <br />
+      <div class="py-4 px-4">
+        <div class="d-flex align-items-center justify-content-between mb-3">
+          <h3 class="mb-0">Recent photos</h3>
+          <!-- <a href="#" class="btn btn-link text-muted">Show all</a> -->
+        </div>
+        {% for data in posts %}
+        <div class="row">
+          <div class="col-lg-6 mb-2 pr-lg-1">
+            <img
+              src="{{ data.postimg.url}}"
+              alt=""
+              class="img-fluid rounded shadow-sm"
+            />
+          </div>
+          {% comment %}
+          <div class="col-lg-6 mb-2 pl-lg-1">
+            <img
+              src="https://bootstrapious.com/i/snippets/sn-profile/img-4.jpg"
+              alt=""
+              class="img-fluid rounded shadow-sm"
+            />
+          </div>
+          <div class="col-lg-6 pr-lg-1 mb-2">
+            <img
+              src="https://bootstrapious.com/i/snippets/sn-profile/img-5.jpg"
+              alt=""
+              class="img-fluid rounded shadow-sm"
+            />
+          </div>
+          <div class="col-lg-6 pl-lg-1">
+            <img
+              src="https://bootstrapious.com/i/snippets/sn-profile/img-6.jpg"
+              alt=""
+              class="img-fluid rounded shadow-sm"
+            />
+          </div>
+        </div>
+        {% endcomment %} {% endfor %}
+        <!-- <div class="py-4">
+                  <h5 class="mb-3">Recent posts</h5>
+                  <div class="p-4 bg-light rounded shadow-sm">
+                      <p class="font-italic mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+                      <ul class="list-inline small text-muted mt-3 mb-0">
+                          <li class="list-inline-item"><i class="fa fa-comment-o mr-2"></i>12 Comments</li>
+                          <li class="list-inline-item"><i class="fa fa-heart-o mr-2"></i>200 Likes</li>
+                      </ul>
+                  </div>
+              </div> -->
+      </div>
+    </div>
+    <!-- End profile widget -->
+  </div>
+</div>
+
+{% comment %}
+<div class="row my-3 p-3">
+  <h1>This is the profile page for {{request.user.username}}</h1>
+  <p>Bio : {{ form.bio }}</p>
+  <img
+    class="rounded-circle account-img"
+    src="{{ form.image.url }} "
+    style="cursor: pointer"
+  />
+
+  {% for data in posts %}
+  <div class="card" style="width: 50%">
+    <img src="{{ data.postimg.url}}" class="card-img-top" alt="..." />
+    <div class="card-body">
+      <h5 class="card-title">{{data.name}}</h5>
+      <p class="card-text">{{data.quotes}}</p>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endcomment %}
+
+<style>
+  /*
+*
+* ==========================================
+* CUSTOM UTIL CLASSES
+* ==========================================
+*
+*/
+  .profile-header {
+    transform: translateY(5rem);
+  }
+
+  /*
+*
+* ==========================================
+* FOR DEMO PURPOSE
+* ==========================================
+*
+*/
+  body {
+    background: #654ea3;
+    background: -webkit-linear-gradient(to right, #654ea3, #eaafc8);
+    background: linear-gradient(to right, #654ea3, #eaafc8);
+    min-height: 100vh;
+  }
+</style>

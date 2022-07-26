@@ -1,13 +1,22 @@
 
-<title>Post</title>
+<title>New Post</title>
 
 <body>
   {% include 'Vox/navbar.html' %}
+  <h3>Create New Post</h3>
+  <br />
+  <form action="{{ action_url}}" method="POST" enctype="multipart/form-data">
+    
+    {% csrf_token %}
+    {{posts.name}}
+    {{posts.quotes.label}}
+    {{posts.quotes}}
+    {{posts.postimg.label}}
+    {{posts.postimg}}
+    <input type="submit" />
+  </form>
 </body>
-<h3>Create New Post</h3>
-<br />
-<form action="{{ action_url}}" method="POST" enctype="multipart/form-data">
-  {% csrf_token %}{{posts}}
-  <input type="submit" />
-</form>
 
+<style>
+  #id_name{display: none;}
+</style>

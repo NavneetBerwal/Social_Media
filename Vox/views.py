@@ -13,20 +13,22 @@ def home(request):
 
 @login_required(login_url='userlogin')
 def post(request):
-
-    posts = postForm()
+    
+    user = request.user
+    posts = postForm(initial = {'name':user})
 
     if request.method == 'POST':
         print(request)
         posts = postForm(request.POST, request.FILES)
         if posts.is_valid():
             posts.save()
+        
 
     context = {
         'posts': posts
     }
 
-    return render(request, 'Vox/feed.html', context)
+    return render(request, 'Vox/Post.html', context)
 
 
 def like(request, pk):
@@ -91,7 +93,9 @@ def feed(request):
 
 @login_required
 def profile(request):
-    form = Post.objects.all()
-    context = {'form':form}
+    user = request.user
+    form = user.profile
+    posts = Post.objects.filter(name = user)
+    context = {'form':form, 'posts': posts}
     
     return render(request, 'Vox/profile.html', context)
