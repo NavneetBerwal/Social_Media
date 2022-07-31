@@ -6,7 +6,7 @@
   {% include 'Vox/navbar.html' %}
 </body>
 
-{% block content %} {% comment %}
+{% block content %}
 <div class="container">
   <div class="row">
     <div class="col-md-12">
@@ -30,8 +30,8 @@
     </div>
   </div>
 </div>
-{% endcomment %}
-{% for data in form %}
+
+{% comment %} {% for data in form %}
 <section class="cards">
   <article class="card card--1">
     <div class="card__info-hover">
@@ -59,9 +59,9 @@
       {% comment %} <span class="card__by"
         >by
         <a href="#" class="card__author" title="author">Celeste Mills</a></span
-      > {% endcomment %}
+      > {% endcomment %} {% comment "" %}
     </div>
-  </article>
+  </article> {% endcomment %}
 
   {% comment %} <article class="card card--2">
     <div class="card__info-hover">
@@ -91,9 +91,10 @@
       >
     </div>
   </article> {% endcomment %}
-</section>
-{% endfor %}
+{% comment %} </section>
+{% endfor %} {% endcomment %}
 {% endblock content %}
+
 
 
 
