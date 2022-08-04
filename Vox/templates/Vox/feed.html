@@ -2,33 +2,37 @@
 
 <title>Feed</title>
 
-<body>
+<body class="flex flex-column">
   {% include 'Vox/navbar.html' %}
 </body>
 
 {% block content %}
-<div class="container">
-  <div class="row">
-    <div class="col-md-12">
-      <h1>Posts</h1>
-      {% for data in form %}
-
-      <div class="card" style="width: 50%">
-        <img src="{{ data.postimg.url}}" class="card-img-top" alt="..." />
-        <div class="card-body">
-          <h5 class="card-title">{{data.name}}</h5>
-          <p class="card-text">{{data.quotes}}</p>
-        </div>
-        <div class="card-body">
-          <a href="{% url 'like' data.id %}" class="card-link">Like</a>
-          <a href="{% url 'unlike' data.id %}" class="card-link">Unlike</a>
-          <a href="#" class="card-link">Comment</a>
-        </div>
-      </div>
-      <br /><br />
-      {% endfor %}
+<div
+  class="container d-flex flex-column flex-wrap justify-content-center"
+  style=""
+>
+  <h1>Posts</h1>
+  <br />
+  {% for data in form %}
+  <br />
+  <div class="card col-12 col-md-6" style="">
+    <img  src="{{ data.postimg.url}}" class="card-img-top" alt="..." />
+    <div class="card-body">
+      <h5 class="card-title">{{data.name}}</h5>
+      <p class="card-text">{{data.quotes}}</p>
+    </div>
+    <div class="card-body">
+      {{data.like.count}}
+      <a href="{% url 'like' data.id %}" class="card-link">
+        <img id='like' onclick="changetoliked(this.id)" src ='../../../media/Like Blank.png'></a>
+      {% comment %} <p>{% for i in likes %} {{ i }} {% endfor %}</p> {% endcomment %}
+      
+      <a href="{% url 'unlike' data.id %}" class="card-link">Unlike</a>
+      <a href="#" class="card-link">Comment</a>
     </div>
   </div>
+  <br /><br />
+  {% endfor %}
 </div>
 
 {% comment %} {% for data in form %}
@@ -56,14 +60,16 @@
     <div class="card__info">
       <span class="card__category"> {{data.name}}</span>
       <h3 class="card__title">{{data.quotes}}</h3>
-      {% comment %} <span class="card__by"
+      {% comment %}
+      <span class="card__by"
         >by
         <a href="#" class="card__author" title="author">Celeste Mills</a></span
-      > {% endcomment %} {% comment "" %}
+      >
+      {% endcomment %} {% comment "" %}
     </div>
-  </article> {% endcomment %}
-
-  {% comment %} <article class="card card--2">
+  </article>
+  {% endcomment %} {% comment %}
+  <article class="card card--2">
     <div class="card__info-hover">
       <svg class="card__like" viewBox="0 0 24 24">
         <path
@@ -90,29 +96,10 @@
         >by <a href="#" class="card__author" title="author">John Doe</a></span
       >
     </div>
-  </article> {% endcomment %}
-{% comment %} </section>
-{% endfor %} {% endcomment %}
-{% endblock content %}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  </article>
+  {% endcomment %} {% comment %}
+</section>
+{% endfor %} {% endcomment %} {% endblock content %}
 
 <style>
   @import url("https://fonts.googleapis.com/css?family=Roboto+Slab:100,300,400,700");
@@ -120,6 +107,12 @@
 
   * {
     box-sizing: border-box;
+  }
+
+  @media (max-width: 768px) {
+    .banner-container {
+      padding: 100px 15px;
+    }
   }
 
   body,
@@ -133,12 +126,12 @@
 
   body {
     background-color: #d2dbdd;
-    display: flex;
+    {% comment %} display: flex;
     display: -webkit-flex;
     -webkit-justify-content: center;
     -webkit-align-items: center;
     justify-content: center;
-    align-items: center;
+    align-items: center; {% endcomment %}
   }
 
   .cards {
@@ -215,7 +208,6 @@
     margin-right: 25px;
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0, 1);
     background-color: #fff;
-    width: 33.3%;
     position: relative;
     border-radius: 12px;
     overflow: hidden;
@@ -274,4 +266,17 @@
   .card:hover .card__info-hover {
     opacity: 1;
   }
+
+  .card-body img{
+    width: 25px;
+  }
+
 </style>
+
+<script>
+  function changetoliked(id){
+    var img = document.getElementById(id)
+    img.src = "../../../media/Like filled.png"
+  }
+</script>
+

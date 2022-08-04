@@ -1,4 +1,3 @@
-
 <head>
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -13,50 +12,68 @@
 </head>
 
 {% block body %} {% endblock body %}
-  <script
-    src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
-    integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
-    crossorigin="anonymous"
-  ></script>
-  <script
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
-    integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
-    crossorigin="anonymous"
-  ></script>
+<script
+  src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+  integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+  crossorigin="anonymous"
+></script>
+<script
+  src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+  integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+  crossorigin="anonymous"
+></script>
 
-<nav class="navbar navbar-expand-lg navbar-black bg-light
-">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="{% url 'feed' %}">Vox</a>
-    <button
-      color = "navy blue"
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        {% comment %} <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{% url 'feed' %}">Home</a>
-        </li> {% endcomment %}
-
-        {% if user.is_authenticated %}
-        <span class="hello">Hello, {{request.user}}</span>
-        <a class="nav-link hello" href="{% url 'userlogout' %}" role="button">Logout</a>
-        <a class="nav-link hello" href="{% url 'post' %}" role="button">new post</a>
-        <a class="nav-link hello" href="{% url 'profile' %}" role="button">profile</a>
-        {% else %}
-        <a class="nav-link hello" href="{% url 'userlogin' %}" role="button">Login</a>
-        <a class="nav-link hello" href="{% url 'registration' %}" role="button">Register</a>
-        {% endif %}
-
-      </ul>
+<div class="header">
+  <nav class="navbar navbar-expand-lg navbar-black bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="{% url 'feed' %}">Vox</a>
+      <button
+        color="navy blue"
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          {% comment %}
+          <li class="nav-item">
+            <a
+              class="nav-link active"
+              aria-current="page"
+              href="{% url 'feed' %}"
+              >Home</a
+            >
+          </li>
+          {% endcomment %} {% if user.is_authenticated %}
+          <span class="hello">Hello, {{request.user}}</span>
+          <a class="nav-link hello" href="{% url 'userlogout' %}" role="button"
+            >Logout</a
+          >
+          <a class="nav-link hello" href="{% url 'post' %}" role="button"
+            >new post</a
+          >
+          <a class="nav-link hello" href="{% url 'profile' %}" role="button"
+            >profile</a
+          >
+          {% else %}
+          <a class="nav-link hello" href="{% url 'userlogin' %}" role="button"
+            >Login</a
+          >
+          <a
+            class="nav-link hello"
+            href="{% url 'registration' %}"
+            role="button"
+            >Register</a
+          >
+          {% endif %}
+        </ul>
+      </div>
     </div>
-  </div>
-</nav>
+  </nav>
+</div>

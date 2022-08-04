@@ -12,10 +12,10 @@ class Post(models.Model):
     like = models.ManyToManyField(User, blank=True)
     postimg = models.ImageField(
         upload_to="static/images", null=True, blank=True)
-    
+
     @property
     def num_likes(self):
-        return self.liked.all().count()
+        return self.likes.count()
 
     class Meta:
         ordering = ['-date']
