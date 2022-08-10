@@ -27,3 +27,8 @@ class UpdateProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['avatar', 'bio']
+
+class CommentForm(ModelForm):
+    class Meta:
+        model = Comment
+        fields = "__all__"

@@ -3,6 +3,10 @@ from django.forms import CharField
 from django.contrib.auth.models import User
 from PIL import Image
 
+class Comment(models.Model):
+    body = models.TextField()
+    comname = models.TextField()
+    cid = models.ForeignKey("Vox.Post", on_delete=models.CASCADE, null=True, blank=True)
 
 class Post(models.Model):
     name = models.ForeignKey(
@@ -10,6 +14,7 @@ class Post(models.Model):
     quotes = models.CharField(max_length=200)
     date = models.DateTimeField(auto_now_add=True)
     like = models.ManyToManyField(User, blank=True)
+    #comment = models.ForeignKey(Comment, on_delete=models.CASCADE,null= True, blank=True)
     postimg = models.ImageField(
         upload_to="static/images", null=True, blank=True)
 
@@ -40,3 +45,4 @@ def save(self, *args, **kwargs):
         new_img = (100, 100)
         img.thumbnail(new_img)
         img.save(self.avatar.path)
+

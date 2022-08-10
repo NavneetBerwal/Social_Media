@@ -16,7 +16,7 @@
   {% for data in form %}
   <br />
   <div class="card col-12 col-md-6" style="">
-    <img  src="{{ data.postimg.url}}" class="card-img-top" alt="..." />
+    <img src="{{ data.postimg.url}}" class="card-img-top" alt="..." />
     <div class="card-body">
       <h5 class="card-title">{{data.name}}</h5>
       <p class="card-text">{{data.quotes}}</p>
@@ -24,11 +24,17 @@
     <div class="card-body">
       {{data.like.count}}
       <a href="{% url 'like' data.id %}" class="card-link">
-        <img id='like' onclick="changetoliked(this.id)" src ='../../../media/Like Blank.png'></a>
-      {% comment %} <p>{% for i in likes %} {{ i }} {% endfor %}</p> {% endcomment %}
-      
+        <img
+          id="like"
+          onclick="changetoliked(this.id)"
+          src="../../../media/Like Blank.png"
+      /></a>
+      {% comment %}
+      <p>{% for i in likes %} {{ i }} {% endfor %}</p>
+      {% endcomment %}
+
       <a href="{% url 'unlike' data.id %}" class="card-link">Unlike</a>
-      <a href="#" class="card-link">Comment</a>
+      <a href="comments/{{data.id}}" class="card-link">Comment</a>
     </div>
   </div>
   <br /><br />
@@ -270,13 +276,11 @@
   .card-body img{
     width: 25px;
   }
-
 </style>
 
 <script>
-  function changetoliked(id){
-    var img = document.getElementById(id)
-    img.src = "../../../media/Like filled.png"
+  function changetoliked(id) {
+    var img = document.getElementById(id);
+    img.src = "../../../media/Like filled.png";
   }
 </script>
-

@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from Vox.models import Post
+from Vox.models import *
 from datetime import datetime
 from django.contrib.auth.forms import UserCreationForm
 from .forms import CreateUserForm, postForm
@@ -99,3 +99,22 @@ def profile(request):
     context = {'form':form, 'posts': posts}
     
     return render(request, 'Vox/profile.html', context)
+
+
+# def comment(request,pk):
+#     post=Post.objects.get(id=pk)
+#     comment = Comment.obj
+#     #comment = Post_Comment.objects.create(post_title=post, comment= request.POST['comment'])
+
+#     return HttpsResponseRedirect('Vox/feed.html')
+
+
+def comments(request,id):
+    comment_id = Post.objects.get(id=id)
+    x = Comment.objects.all.filter(cid=comment_id)
+  #  template = Vox.get_template('comment.html')
+    context = {
+        'x':x,
+    }
+    return render(request, 'Vox/comment.html', context)
+   # return HttpResponse(template.render(context, request))
